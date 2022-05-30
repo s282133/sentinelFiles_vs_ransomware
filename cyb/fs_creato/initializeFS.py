@@ -11,7 +11,7 @@ for root, dirs, files in os.walk(path):
         if (file.endswith(".py") or file.endswith(".sh")):
             pass
         else:
-            filelist.append(file)
+            filelist.append(os.path.join(root,file))
 #print(filelist)
 
 for filename in filelist:

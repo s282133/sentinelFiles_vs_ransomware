@@ -2,6 +2,9 @@ import os
 from os.path import isfile, join
 import random
 import string
+import hashlib
+
+hasher = hashlib.sha512()
 
 letters = string.ascii_lowercase + string.ascii_uppercase + string.digits
 
@@ -71,6 +74,7 @@ if __name__ == "__main__":
     filesListInDir = []
 
     for dirname in dirlist:                                                          # all directories starting from the root  
+        hashfile = open(dirname + "/.hashes.txt", "w")
         onlyfiles = [f for f in os.listdir(dirname) if isfile(join(dirname, f))]     # all files in current dir 
         #if(len(onlyfiles) > 0):
         print(f"DIR: {dirname} FILEs PRIMA: {onlyfiles}")
@@ -83,6 +87,13 @@ if __name__ == "__main__":
             firstname = ".00"
             lastname = "zzz"
         sentinelList = generateSentinels(firstname, lastname, numSentinels, dirname)
+        hashfile.write(f"{numSentinels}\n")
         for sentinel in sentinelList:
             onlyfiles.append(sentinel)
+            sentinelfilename = os.path.join(dirname, sentinel)
+            with open(sentinelfilename, "rb") as afile:
+                buf = afile.read()
+                hasher.update(buf)
+                hashfile.write(f'{sentinel} : {hasher.hexdigest()} \n')
+        hashfile.close()
         print(f"DIR: {dirname} FILEs DOPO: {onlyfiles}")

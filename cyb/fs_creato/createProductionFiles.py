@@ -25,8 +25,8 @@ if __name__ == "__main__":
     for dirname in dirlist:
         randNumFiles = random.randint(0, 7) 
         for i in range(0,randNumFiles):
-            filenameLength = random.randint(4, 10)
-            newfileName = generateRandomRow(filenameLength)
+            filenameLength = random.randint(2,5)
+            newfileName = "samples_" + generateRandomRow(filenameLength) + ".txt"
             numrows = random.randint(0, 40)
             newfileName = os.path.join(dirname, newfileName)
             with open(newfileName, "w") as f:

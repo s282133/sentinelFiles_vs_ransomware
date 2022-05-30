@@ -57,7 +57,7 @@ def generateRandomName(firstname, lastname, i, numSentinels):
             char = chr(ascii_avg)
             #print(f"char : {char}")
             name += char
-        return name
+        return name + str(i)
 
 
 if __name__ == "__main__":

@@ -10,7 +10,7 @@ for root, dirs, files in os.walk(path):
     for file in files:
         if not file.endswith(".py"):
             filelist.append(os.path.join(root,file))
-print(filelist)
+#print(filelist)
 
 for filename in filelist:
     os.remove(filename)

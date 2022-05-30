@@ -81,7 +81,9 @@ if __name__ == "__main__":
         numFiles = len(onlyfiles)
         numSentinels = int( int(numFiles) / 2) +2                                   # ne crea sempre minimo 2 in ogni directory
         if numFiles > 0:
-            firstname = onlyfiles[0]
+            if onlyfiles[0] == ".hashes.txt":
+                onlyfiles.pop(0)
+            # firstname = onlyfiles[0]
             lastname = onlyfiles[-1]
         else:
             firstname = ".00"

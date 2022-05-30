@@ -91,9 +91,10 @@ if __name__ == "__main__":
         for sentinel in sentinelList:
             onlyfiles.append(sentinel)
             sentinelfilename = os.path.join(dirname, sentinel)
-            with open(sentinelfilename, "rb") as afile:
-                buf = afile.read()
-                hasher.update(buf)
-                hashfile.write(f'{sentinel} : {hasher.hexdigest()} \n')
+            if isfile(sentinelfilename) and sentinel != ".hashes.txt":
+                with open(sentinelfilename, "rb") as afile:
+                    buf = afile.read()
+                    hasher.update(buf)
+                    hashfile.write(f'{sentinel} : {hasher.hexdigest()} \n')
         hashfile.close()
         print(f"DIR: {dirname} FILEs DOPO: {onlyfiles}")

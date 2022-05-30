@@ -1,0 +1,5 @@
+2
+C:\Users\anton\Desktop\git_cyber\testFolder\fs_creato\A\FG\LUC\.samples_16yMG.txt
+4bfb61dc652599e1748571f00ac6f40debf1c1f23175a4a4186d811f073a680773a8d8ee46ede1de6e2b778074be1108397384b4ec552d521466d3fe28377736
+C:\Users\anton\Desktop\git_cyber\testFolder\fs_creato\A\FG\LUC\zsamples_16yMG.txt
+9c23d7aa05dce46ca0e4963cb25f527ee9043a15abd9109bf606a4e9f8227f777f70374dc501e1bcbe3066f7df77254580715f6a2ee258477b5d49f9d8154aac

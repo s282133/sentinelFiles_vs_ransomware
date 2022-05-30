@@ -1,0 +1,5 @@
+2
+C:\Users\anton\Desktop\git_cyber\testFolder\fs_creato\B\BO\.samples_UqGoR.txt
+fa9bdebf964b84b4f206913252815136388ec006dcfe79cdc180c1fdafc32934ecc3654f3ebe231c28f995444b6bbb94c8be0b728a1a5d43e8e270171ed092a3
+C:\Users\anton\Desktop\git_cyber\testFolder\fs_creato\B\BO\zsamples_UqGoR.txt
+73b9edda5b8f17fa779ee33a04e60bf015f6a43904aef052093d17d5d3b0d2d7731e940fc41a2585462dc38691a291a06d0e469b8333dd4ab08402f6384a5a10

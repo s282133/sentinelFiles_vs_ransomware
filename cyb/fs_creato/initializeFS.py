@@ -8,7 +8,9 @@ filelist = []
 
 for root, dirs, files in os.walk(path):
     for file in files:
-        if not file.endswith(".py"):
+        if (file.endswith(".py") or file.endswith(".sh")):
+            pass
+        else:
             filelist.append(os.path.join(root,file))
 #print(filelist)
 

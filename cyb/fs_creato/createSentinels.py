@@ -86,7 +86,7 @@ if __name__ == "__main__":
             firstname = ".00"
             lastname = "zzz"
         sentinelList = generateSentinels(firstname, lastname, numSentinels, dirname)
-        hashfile = open(dirname + "/.hashes.txt", "w")
+        hashfile = open(dirname + "/.hashes.txt", "w")        
         hashfile.write(f"{numSentinels}\n")
         for sentinel in sentinelList:
             onlyfiles.append(sentinel)

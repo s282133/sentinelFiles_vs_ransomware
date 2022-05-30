@@ -74,21 +74,19 @@ if __name__ == "__main__":
     filesListInDir = []
 
     for dirname in dirlist:                                                          # all directories starting from the root  
-        hashfile = open(dirname + "/.hashes.txt", "w")
         onlyfiles = [f for f in os.listdir(dirname) if isfile(join(dirname, f))]     # all files in current dir 
         #if(len(onlyfiles) > 0):
         print(f"DIR: {dirname} FILEs PRIMA: {onlyfiles}")
         numFiles = len(onlyfiles)
         numSentinels = int( int(numFiles) / 2) +2                                   # ne crea sempre minimo 2 in ogni directory
         if numFiles > 0:
-            if onlyfiles[0] == ".hashes.txt":
-                onlyfiles.pop(0)
-            # firstname = onlyfiles[0]
+            firstname = onlyfiles[0]
             lastname = onlyfiles[-1]
         else:
             firstname = ".00"
             lastname = "zzz"
         sentinelList = generateSentinels(firstname, lastname, numSentinels, dirname)
+        hashfile = open(dirname + "/.hashes.txt", "w")        
         hashfile.write(f"{numSentinels}\n")
         for sentinel in sentinelList:
             onlyfiles.append(sentinel)

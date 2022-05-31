@@ -40,7 +40,7 @@ if __name__ == "__main__":
         storedHashFile = open(storedHashFileName, "r")
         storedSentinelsNum = int(storedHashFile.readline())
         for i in range(storedSentinelsNum):
-            hash_i_name = str(storedHashFile.readline())
+            hash_i_name = str(storedHashFile.readline().rstrip('\n'))
             print(f"hash_i_name : {hash_i_name}")
             hash_i_digestSTORED = str(storedHashFile.readline())
             print(f"hash_i_digestSTORED : {hash_i_digestSTORED}")

@@ -4,6 +4,7 @@ import sys
 import os
 import hashlib
 import subprocess
+import time
 
 from pubsub import *
 
@@ -20,7 +21,7 @@ def computeHash(filename):
     process = subprocess.Popen(bashcommand.split(), stdout=subprocess.PIPE)
     output,error = process.communicate()
     output = output.split()[0].decode("utf-8")
-    print(output)
+    #print(output)
     return output
 
 if __name__ == "__main__":
@@ -33,9 +34,12 @@ if __name__ == "__main__":
 
     path =os.getcwd()
     
+    rounds = 0
 
-    while True:
-
+    while rounds < 1000000:
+            
+        start = time.time()
+    
         dirlist = []
 
         for root, dirs, files in os.walk(path):
@@ -51,15 +55,19 @@ if __name__ == "__main__":
             storedSentinelsNum = int(storedHashFile.readline())
             for i in range(storedSentinelsNum):
                 hash_i_name = str(storedHashFile.readline().rstrip('\n'))
-                print(f"hash_i_name : {hash_i_name}")
+                #print(f"hash_i_name : {hash_i_name}")
                 hash_i_digestSTORED = str(storedHashFile.readline().rstrip('\n'))
-                print(f"hash_i_digestSTORED\n{repr(hash_i_digestSTORED)}")
+                #print(f"hash_i_digestSTORED\n{repr(hash_i_digestSTORED)}")
                 filename = hash_i_name
-                print(f"filename : {filename}")
+                #print(f"filename : {filename}")
                 hash_i_digestCOMPUTED = computeHash(filename)
-                print(f"hash_i_digestCOMPUTED\n{repr(hash_i_digestCOMPUTED)}")
+                #print(f"hash_i_digestCOMPUTED\n{repr(hash_i_digestCOMPUTED)}")
                 if repr(str(hash_i_digestSTORED)) != repr(str(hash_i_digestCOMPUTED)):
                     print(f"MISMATCH!! in {filename}")
                     # qui devo pubblicare il messaggio via MQTT
+                    rpi.myPublish("PoliTo/C4ES/" + clientname + "/attack", "possible ransomware attack in progress!")
                     while True:
                         pass
+        end = time.time()
+        rounds += 1
+        print(f"Time elapsed: {end-start}")

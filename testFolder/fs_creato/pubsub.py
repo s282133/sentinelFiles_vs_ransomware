@@ -12,8 +12,8 @@ class pubsub():
         self.baseTopic = "PoliTo/C4ES/"
         self.pubTopic = self.baseTopic + self.clientID
         self.subTopic = self.baseTopic + "#"
-        self.unsubTopic = self.pubTopic 
-        print(f"pubtopic: {self.pubTopic}       subtopic: {self.subTopic}       unsubtopic: {self.unsubTopic}")
+        self.unsubTopics = []
+        self.unsubTopics.append(self.pubTopic) 
         self.client.mySubscribe(self.subTopic)
         
 
@@ -25,10 +25,16 @@ class pubsub():
         self.client.myPublish(topic, message)
 
     def notify(self, topic, message):
-        if(topic == self.unsubTopic):
+        if(topic in self.unsubTopics):
             pass        # i.e., ignore the message
+        elif(topic == "PoliTo/C4ES/+/attack" and not topic in self.unsubTopics):
+            fields = topic.split("/")
+            fieldClientID = fields[2]
+            newUnsubTopic = self.baseTopic + "/" + fieldClientID + "#"
+            self.unsubTopics.append(newUnsubTopic)
+            print(f"from now on {self.clientID} will not manage messages from {fieldClientID}") 
         else:
-            print(f"{self.clientID} received {message} from topic: {topic}")
+            print(f"{self.clientID} received {message} from {topic}")
 
     # def myUnsubscribe(self, topic):
     #     print(f"{self.clientID} unsubscribing from topic: {topic}")

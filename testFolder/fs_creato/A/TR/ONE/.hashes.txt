@@ -1,5 +1,0 @@
-2
-/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/TR/ONE/.samples_ys.txt
-692b8ba60d5226cde8e2038eb48e8d81a1e979046add60ef6fdd48f3cb693a53bf320b78f15793b65e4cd4d22b820a1ef5dadb89490f28cb922546030a05656e
-/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/TR/ONE/zsamples_ys.txt
-a4588b75da8d0975220b31457d91b3190262a56893ad554462985fd85e60e0c2556a63b30a7474db1db3fa8dd666e6a1d6073f824b6db6cdacd0574a18c0415a

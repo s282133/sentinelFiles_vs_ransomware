@@ -1,5 +1,0 @@
-2
-/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/BO/OIR/.000
-406a60fb72d0f998f35fcde5b4c38fa689005682072e561722228c92ca291b0598037c894143c80afa0f0d0b331d840edbd683574917e97883bdb1c7c6893154
-/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/BO/OIR/zzzz
-98f0905a1e2465a658a1d43d8a939b5b316eeb8e3a66c055d919daf6413694574b9232e307e55387898842c848863bfa09c3679a606a58fa6dc9ca9558c7daf3

@@ -1,5 +1,0 @@
-2
-/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/FG/TO/.samples_Mon.txt
-28489c2ede5b6cfd5e726d774032d124e38b000549188e93fe6d625c3fbaeb1a095ccb6184b9e617ec5648684a513b5ede39a4d33d67147741f665f6e21295e6
-/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/FG/TO/zsamples_Mon.txt
-913b4c03f55ec746b504730d7823dcc819dd7ddb890e92ffff04345ce64f64af9fd52a3feb53f3bffe15c65378929d844e6bd6c0ae2da0a4fe1b20fa2a87df1d

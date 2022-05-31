@@ -1,5 +1,0 @@
-2
-/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/BO/REN/.samples_lX.txt
-98fadba67cfa9ea4412593f212e324154c02a7f109c27cdc1077e884660eea74f3c71480c079194339e9a12913558b8ec07a5857d33bde39534eaf2ca2fbda84
-/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/BO/REN/zsamples_lX.txt
-ff7edce6ce982980833268955db8b3074d59ddaeb703a5ab3faeb24727ecc209792278e5d858976d1d1143d69b7f6ab78ba9ee5e83cbd47df24af6abc963da73

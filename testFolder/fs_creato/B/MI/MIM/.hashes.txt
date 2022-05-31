@@ -1,5 +1,0 @@
-2
-/home/antonio/Desktop/git_cyber/testFolder/fs_creato/B/MI/MIM/.000
-5849624a948e8a75c4328b2d640b3e515c89d7f5258cd657ea83f3f91b9ee723c6c58a445c24edc8625b4b02079fe3ec3054417a9579b13f33442bb266868bc9
-/home/antonio/Desktop/git_cyber/testFolder/fs_creato/B/MI/MIM/zzzz
-bbbaba23cc6a95d9cbbc75f978c84f09ea72cfc010e7594cf7edd8b96f138f95965b82ca19b15313b7e2dd34157e1eb47a9bdb6eea6d98569910bfa82d21df50

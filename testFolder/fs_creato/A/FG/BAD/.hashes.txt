@@ -1,5 +1,0 @@
-2
-/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/FG/BAD/.000
-b95da8d6f3733cef904b95c3bb9652a0e6e7596b70a642bb277b4e8064ada304e8c30f07c34318d3e7e6743d9d560255d97583101e43eb6f4a76f7df4c189b41
-/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/FG/BAD/zzzz
-b2132c9a85c005749010e86f0c1598fc19ddd4ed5b9fafad30059700395bd29a9cf52de20c142dd8616ccf17592bc2565e0bb4f2411c9a5e2f47c4d4cf4796ad

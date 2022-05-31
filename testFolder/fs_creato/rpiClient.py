@@ -37,7 +37,7 @@ if __name__ == "__main__":
     filesListInDir = []
 
     for dirname in dirlist:  
-        storedHashFileName = dirname + "/.hashes.txt"       # per windows, / per linux
+        storedHashFileName = dirname + "/.hashes.txt"       # \ per windows, / per linux
         storedHashFile = open(storedHashFileName, "r")
         storedSentinelsNum = int(storedHashFile.readline())
         for i in range(storedSentinelsNum):
@@ -46,15 +46,10 @@ if __name__ == "__main__":
             hash_i_digestSTORED = str(storedHashFile.readline().rstrip('\n'))
             print(f"hash_i_digestSTORED\n{repr(hash_i_digestSTORED)}")
             filename = hash_i_name
-            #fn = dirname + "\\" + filename
-            #print(f"fn : {fn}")
             print(f"filename : {filename}")
-            #hash_i_digestCOMPUTED = computeHash(os.path.join(dirname, hash_i_name))
             hash_i_digestCOMPUTED = computeHash(filename)
             print(f"hash_i_digestCOMPUTED\n{repr(hash_i_digestCOMPUTED)}")
             if repr(str(hash_i_digestSTORED)) != repr(str(hash_i_digestCOMPUTED)):
-                #print(f"{hash_i_name} : {hash_i_digestSTORED} != {hash_i_digestCOMPUTED}")
-                #rpi.publish(hash_i_name, hash_i_digestCOMPUTED)
                 print("MISMATCH!!")
                 while True:
                     pass

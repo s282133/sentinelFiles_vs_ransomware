@@ -10,9 +10,10 @@ def computeHash(filename):
     hasher = hashlib.sha512()
     print(f"Computing hash for {filename}")
     print(f"filename = {filename}")
-    with open(filename, "r") as afile:
+    with open(filename, "rb") as afile:
         buf = afile.read()
         hasher.update(buf)
+        #hashfile.write(f'{sentinel} : {hasher.hexdigest()} \n')
         hashhex = hasher.hexdigest()
     return hashhex
 

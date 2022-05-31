@@ -1,1 +1,5 @@
-4
+2
+/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/.samples_YbU.txt
+3b17d24786984341dafc0cff6c5f089a6b5acca7ad2208c8137e7368337e2753cf7d07c7b7ca0051123d097f654f1b27cfc58eb4f589a358ac6d6202d337076d
+/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/zsamples_YbU.txt
+6559bb5b8cd9b25fc3c135613f2db5a28fccfc9b77bff7227b1eea92f298c8e7afc1d5648b35640dd9608f436748dfa65990f472ea46d27d86fa4ff67d949ddb

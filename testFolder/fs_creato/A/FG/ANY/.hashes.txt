@@ -1,0 +1,5 @@
+2
+/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/FG/ANY/.samples_Fc0pB.txt
+b2622a1f619696968cd767e7d74a05c4d01b4f593cac8aa95b986aec304093ea100d08d2a68cb1cc2508f34a926853dd295fe890069f386eb6c89123bc189ccb
+/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/FG/ANY/zsamples_Fc0pB.txt
+660c8924078ee384958c2ebb64d3acdf8c3d9f4b77f2c1b978d0a09e37c3e36957289b6031deb8b218ba61e4b3b2c708727d06315b17b0df5844808eb5004bfd

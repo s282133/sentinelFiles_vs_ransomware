@@ -1,0 +1,5 @@
+2
+/home/antonio/Desktop/git_cyber/testFolder/fs_creato/B/AN/LIL/.samples_r71F.txt
+21cd9114f987f728baf006af5ade20afd3f01867e141f4269e571fe0a422201d71339457ff14d4e2fd96f7ea30f1f799ea1336d43c07677233f241819a458efe
+/home/antonio/Desktop/git_cyber/testFolder/fs_creato/B/AN/LIL/zsamples_r71F.txt
+6baa884c6b8a7436e514f88034148507dd144c92b10bffd6f8e18c54df108e24a4e9e03d4517756b409c1c1dbe1058d154539e273bb1b2f4fc373d82cd12330a

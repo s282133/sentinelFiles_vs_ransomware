@@ -1,0 +1,5 @@
+2
+/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/BO/IRE/.samples_ou.txt
+5f581d8e2b787e69c1d15fad3ace22ff4d7bf52a2e01faa6af87443b00dd59cb89d5cf71390916359974dce5c81b4a628e5c36c426d74ba3c152097fed930240
+/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/BO/IRE/zsamples_ou.txt
+57e7f0b722f350dddcdec1e2bfe9b5c95cb934a8490970b09392a53b18439a26a5500e39fe91554efd140ce386beb87b1ccf3714c87e15573d75b975b7a59924

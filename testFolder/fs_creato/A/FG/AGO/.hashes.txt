@@ -1,0 +1,5 @@
+2
+/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/FG/AGO/.000
+ad6b104519f3b977539c77f7be5617d77b5a1bddf88dff99d485b8b6c44d6e06c1a4c77ad45028ea48bf523dd80c865c675fa71318e70c2592cf17a1306ef1c4
+/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/FG/AGO/zzzz
+b62dd674d02f22a801186615ed96bc75b1afba8201034752f3e889b21fa018b429a1747c97a873110d00a4e1d00a434a9e3d4da2a416af9550aa401790e76901

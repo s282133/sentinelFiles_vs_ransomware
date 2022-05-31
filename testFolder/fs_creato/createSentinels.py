@@ -102,9 +102,9 @@ if __name__ == "__main__":
                 bashcommand = "sha512sum " + sentinelfilename
                 process = subprocess.Popen(bashcommand.split(), stdout=subprocess.PIPE)
                 output,error = process.communicate()
+                output = output.split()[0].decode("utf-8")
                 print(output)
+                hashfile.write(f'{sentinelfilename}\n')
                 hashfile.write(f'{output}\n')
-                while True:
-                    pass
         hashfile.close()
         print(f"DIR: {dirname} FILEs DOPO: {onlyfiles}")

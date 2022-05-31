@@ -14,7 +14,7 @@ def computeHash(filename):
         buf = afile.read()
         hasher.update(buf)
         #hashfile.write(f'{sentinel} : {hasher.hexdigest()} \n')
-        hashhex = hasher.hexdigest()
+        hashhex = str(hasher.hexdigest())
     return hashhex
 
 if __name__ == "__main__":
@@ -43,16 +43,16 @@ if __name__ == "__main__":
         for i in range(storedSentinelsNum):
             hash_i_name = str(storedHashFile.readline().rstrip('\n'))
             print(f"hash_i_name : {hash_i_name}")
-            hash_i_digestSTORED = str(storedHashFile.readline())
-            print(f"hash_i_digestSTORED : {hash_i_digestSTORED}")
+            hash_i_digestSTORED = str(storedHashFile.readline().rstrip('\n'))
+            print(f"hash_i_digestSTORED\n{repr(hash_i_digestSTORED)}")
             filename = hash_i_name
             #fn = dirname + "\\" + filename
             #print(f"fn : {fn}")
             print(f"filename : {filename}")
             #hash_i_digestCOMPUTED = computeHash(os.path.join(dirname, hash_i_name))
             hash_i_digestCOMPUTED = computeHash(filename)
-            print(f"hash_i_digestCOMPUTED : {hash_i_digestCOMPUTED}")
-            if hash_i_digestSTORED != hash_i_digestCOMPUTED:
+            print(f"hash_i_digestCOMPUTED\n{repr(hash_i_digestCOMPUTED)}")
+            if repr(str(hash_i_digestSTORED)) != repr(str(hash_i_digestCOMPUTED)):
                 #print(f"{hash_i_name} : {hash_i_digestSTORED} != {hash_i_digestCOMPUTED}")
                 #rpi.publish(hash_i_name, hash_i_digestCOMPUTED)
                 print("MISMATCH!!")

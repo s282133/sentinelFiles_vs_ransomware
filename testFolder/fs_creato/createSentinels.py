@@ -3,8 +3,9 @@ from os.path import isfile, join
 import random
 import string
 import hashlib
+import subprocess
 
-hasher = hashlib.sha512()
+#hasher = hashlib.sha512()
 
 letters = string.ascii_lowercase + string.ascii_uppercase + string.digits
 
@@ -92,11 +93,18 @@ if __name__ == "__main__":
             onlyfiles.append(sentinel)
             sentinelfilename = os.path.join(dirname, sentinel)
             if isfile(sentinelfilename) and sentinel != ".hashes.txt":
-                with open(sentinelfilename, "rb") as afile:
-                    buf = afile.read()
-                    hasher.update(buf)
-                    #hashfile.write(f'{sentinel} : {hasher.hexdigest()} \n')
-                    hashfile.write(f'{sentinelfilename}\n')
-                    hashfile.write(f'{hasher.hexdigest()}\n')
+                # with open(sentinelfilename, "rb") as afile:
+                #     buf = afile.read()
+                #     hasher.update(buf)
+                #     #hashfile.write(f'{sentinel} : {hasher.hexdigest()} \n')
+                #     hashfile.write(f'{sentinelfilename}\n')
+                #     hashfile.write(f'{hasher.hexdigest()}\n')
+                bashcommand = "sha512sum " + sentinelfilename
+                process = subprocess.Popen(bashcommand.split(), stdout=subprocess.PIPE)
+                output,error = process.communicate()
+                print(output)
+                hashfile.write(f'{output}\n')
+                while True:
+                    pass
         hashfile.close()
         print(f"DIR: {dirname} FILEs DOPO: {onlyfiles}")

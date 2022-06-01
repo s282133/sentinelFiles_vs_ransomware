@@ -1,5 +1,7 @@
 # Cybersecurity Honeypot: fighting ransomware with sentinel files
 
+**TUTTO IL MATERIALE UTILE E' IN TESTFOLDER, PER ORA, PER EVITARE DI CREARE FILE RANDOM DAPPERTUTTO !**
+
 ## Introduction
 
 This is the project of 'Cybersecurity for Embedded Systems' course @PoliTO, A.Y. 2021-2022. <br /><br />
@@ -26,5 +28,3 @@ If you run scripts through IDEs, such as Visual Studio Code, run Python scripts 
 3) A Python script called "createSentinels.py" creates sentinel files for each directory in the file system;
 4) A Python script called "rpiClient.py", that accepts a clientID as argument on the command line, creates an instance of RPI client. Launch the script as ```python3 -B rpiClient.py <clientID>```;
 5) A Bash script called "script.sh" performs the four operations above and also launches a RPI client instance, just for test purposes. The real simulation will launch a RPI client instance on each raspberry and the computer will launch the malware attack.<br /><br />
-
-** TUTTO IL MATERIALE UTILE E' IN TESTFOLDER, PER ORA, PER EVITARE DI CREARE FILE RANDOM DAPPERTUTTO ! **

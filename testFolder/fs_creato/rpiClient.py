@@ -5,18 +5,11 @@ import os
 import hashlib
 import subprocess
 import time
+import json
 
 from pubsub import *
 
 def computeHash(filename):
-    # hasher = hashlib.sha512()
-    # print(f"Computing hash for {filename}")
-    # print(f"filename = {filename}")
-    # with open(filename, "rb") as afile:
-    #     buf = afile.read()
-    #     hasher.update(buf)
-    #     #hashfile.write(f'{sentinel} : {hasher.hexdigest()} \n')
-    #     hashhex = str(hasher.hexdigest())
     bashcommand = "sha512sum " + filename
     process = subprocess.Popen(bashcommand.split(), stdout=subprocess.PIPE)
     output,error = process.communicate()
@@ -30,27 +23,23 @@ if __name__ == "__main__":
 
     rpi = pubsub(clientname)
 
-    # while True:
-
     path =os.getcwd()
     
-    rounds = 0
+    dirlist = []
 
-    while rounds < 1000000:
+    for root, dirs, files in os.walk(path):
+        for dir in dirs:
+            dirlist.append(os.path.join(root,dir))
+            
+    while True:
             
         start = time.time()
-    
-        dirlist = []
 
-        for root, dirs, files in os.walk(path):
-            for dir in dirs:
-                dirlist.append(os.path.join(root,dir))
-
-        allfilesListInDir = []
-        filesListInDir = []
+        # allfilesListInDir = []
+        # filesListInDir = []
 
         for dirname in dirlist:  
-            storedHashFileName = dirname + "/.hashes.txt"       # \ per windows, / per linux
+            storedHashFileName = dirname + "/.hashes.txt" 
             storedHashFile = open(storedHashFileName, "r")
             storedSentinelsNum = int(storedHashFile.readline())
             for i in range(storedSentinelsNum):
@@ -65,9 +54,12 @@ if __name__ == "__main__":
                 if repr(str(hash_i_digestSTORED)) != repr(str(hash_i_digestCOMPUTED)):
                     print(f"MISMATCH!! in {filename}")
                     # qui devo pubblicare il messaggio via MQTT
-                    rpi.myPublish("PoliTo/C4ES/" + clientname + "/attack", "possible ransomware attack in progress!")
+                    # @TODO: capire come prendere il clientID del malware
+                    message = {"hash_mismatch_in" : filename, "untrust_topic" : rpi.pubTopic}
+                    rpi.myPublish("PoliTo/C4ES/" + clientname + "/attack", message)
                     while True:
+                        # qui potrei mettere lo shutdown del sistema, per ora si ferma solamente
                         pass
+
         end = time.time()
-        rounds += 1
         print(f"Time elapsed: {end-start}")

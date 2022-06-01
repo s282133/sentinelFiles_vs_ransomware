@@ -1,6 +1,8 @@
 from time import sleep
 from MyMQTT import *
 import paho.mqtt.client as PahoMQTT
+import json
+import time
 
 class pubsub():
 
@@ -15,6 +17,9 @@ class pubsub():
         self.unsubTopics = []
         self.unsubTopics.append(self.pubTopic) 
         self.client.mySubscribe(self.subTopic)
+        self.blacklist = open("blacklist.json", "w")
+        self.blacklist.close()
+        self.banTime = 10 * 60
         
 
     def start (self):
@@ -31,11 +36,17 @@ class pubsub():
             fields = topic.split("/")
             fieldClientID = fields[2]
             newUnsubTopic = self.baseTopic + "/" + fieldClientID + "#"
-            self.unsubTopics.append(newUnsubTopic)
-            print(f"from now on {self.clientID} will not manage messages from {fieldClientID}") 
+            #self.unsubTopics.append(newUnsubTopic)
+            # START da testare !
+            self.currBlackListFile = open("blacklist.json", "r")
+            self.currBlackList = json.load(self.currBlackListFile)
+            self.currBlackListFile.close()
+            self.currBlackList.append({"clientID" : fieldClientID, "banTime" : time.time()})
+            self.newBlackListFile = open("blacklist.json", "w")
+            json.dump(self.currBlackList, self.newBlackListFile)
+            print(f"from now on {self.clientID} will not manage messages from {fieldClientID} for {self.banTime} seconds") 
+            # END da testare !
         else:
             print(f"{self.clientID} received {message} from {topic}")
 
-    # def myUnsubscribe(self, topic):
-    #     print(f"{self.clientID} unsubscribing from topic: {topic}")
-    #     PahoMQTT..unsubscribe(topic)
+# cose da aggiungere: logica per cui se currTime - entryTime > threshold => riabilita il client

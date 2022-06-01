@@ -1,9 +1,10 @@
 # Cybersecurity Honeypot: fighting ransomware with sentinel files
 
 This is the project of 'Cybersecurity for Embedded Systems' course @PoliTO, A.Y. 2021-2022. <br />
-We present a cluster of Raspberry Pi devices. Each raspberry can communicate to the others in the network, according to the principles of a fully connected mesh. <br />
-The following picture is a schematic of our proposed solution: 
-![Schematic](/images/malwareHoneypot.drawio.png "schematic")
+We present a cluster of Raspberry Pi devices. Each raspberry can communicate to the others in the network, according to the principles of a fully connected mesh. <br /><br />
+The following picture is a schematic of our proposed solution: <br /> 
+![Schematic](/images/malwareHoneypot.drawio.png "schematic") <br />
+hello
 
 
 ## How to play

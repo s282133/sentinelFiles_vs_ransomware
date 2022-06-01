@@ -3,6 +3,9 @@ from MyMQTT import *
 import paho.mqtt.client as PahoMQTT
 import json
 import time
+import re
+
+pattern = re.compile(r'PoliTo/C4ES/.+/attack')
 
 class pubsub():
 
@@ -32,7 +35,7 @@ class pubsub():
     def notify(self, topic, message):
         if(topic in self.unsubTopics):
             pass        # i.e., ignore the message
-        elif(topic == "PoliTo/C4ES/+/attack" and not topic in self.unsubTopics):
+        elif(bool(pattern.match(str(topic))) and not topic in self.unsubTopics):
             fields = topic.split("/")
             fieldClientID = fields[2]
             newUnsubTopic = self.baseTopic + "/" + fieldClientID + "#"

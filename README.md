@@ -1,6 +1,7 @@
 # Cybersecurity Honeypot: fighting ransomware with sentinel files
 
-**TUTTO IL MATERIALE UTILE E' IN TESTFOLDER, PER ORA, PER EVITARE DI CREARE FILE RANDOM DAPPERTUTTO !**
+**TUTTO IL MATERIALE UTILE E' IN TESTFOLDER, PER ORA, PER EVITARE DI CREARE FILE RANDOM DAPPERTUTTO !** <br /> 
+Ho aggiunto delle parti non testate a rpiClient.py e pubsub.py, potrebbero non funzionare.
 
 ## Introduction
 

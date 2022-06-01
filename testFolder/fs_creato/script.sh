@@ -6,4 +6,4 @@ python3 -B ./createProductionFiles.py
 
 python3 -B ./createSentinels.py
 
-python3 -B ./rpiClient.py 69
+python3 -B ./rpiClient.py pi0

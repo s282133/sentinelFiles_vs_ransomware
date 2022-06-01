@@ -1,0 +1,10 @@
+{
+    "ban_list": [
+        {
+            "clientID": "pi0",
+            "banTime": 1654098658.2481802,
+            "altered_file": "/home/pi/Desktop/fs_creato/A/TR/.samples_oH.txt",
+            "untrusted_topic": "PoliTo/C4ES/pi0/#"
+        }
+    ]
+}

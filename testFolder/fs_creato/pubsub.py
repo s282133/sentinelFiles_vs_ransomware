@@ -21,6 +21,7 @@ class pubsub():
         self.unsubTopics.append(self.pubTopic) 
         self.client.mySubscribe(self.subTopic)
         self.blacklist = open("blacklist.json", "w")
+        self.blacklist.write("{}")
         self.blacklist.close()
         self.banTime = 10 * 60
         

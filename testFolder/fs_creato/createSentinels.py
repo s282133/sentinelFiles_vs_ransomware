@@ -109,5 +109,5 @@ if __name__ == "__main__":
                 hashfile.write(f'{output}\n')
         hashfile.close()
         # changing permissions: now owner has READ permission, group has READ permission, others have READ permission
-        os.chmod(hashfile,  S_IREAD | S_IRGRP | S_IROTH)
+        # os.chmod(hashfile,  S_IREAD | S_IRGRP | S_IROTH)
         print(f"DIR: {dirname} FILEs DOPO: {onlyfiles}")

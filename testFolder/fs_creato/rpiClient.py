@@ -55,7 +55,7 @@ if __name__ == "__main__":
                     print(f"MISMATCH!! in {filename}")
                     # qui devo pubblicare il messaggio via MQTT
                     # @TODO: capire come prendere il clientID del malware
-                    message = {"hash_mismatch_in" : filename, "untrust_topic" : rpi.pubTopic}
+                    message = {"hash_mismatch_in" : filename, "untrust_topic" : rpi.pubTopic + "/#"}
                     rpi.myPublish("PoliTo/C4ES/" + clientname + "/attack", message)
                     while True:
                         # qui potrei mettere lo shutdown del sistema, per ora si ferma solamente

@@ -2,8 +2,8 @@
 
 This is the project of 'Cybersecurity for Embedded Systems' course @PoliTO, A.Y. 2021-2022. <br />
 We present a cluster of Raspberry Pi devices. Each raspberry can communicate to the others in the network, according to the principles of a fully connected mesh. <br /><br />
-The following picture is a schematic of our proposed solution: <br /> 
-![Schematic](/images/malwareHoneypot.drawio.png "schematic") <br />
+The following picture is a schematic of our proposed solution: <br /><br /> 
+![Schematic](/images/malwareHoneypot.drawio.png "schematic") <br /><br /> 
 hello
 
 

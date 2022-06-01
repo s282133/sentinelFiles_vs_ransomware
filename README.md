@@ -28,3 +28,4 @@ If you run scripts through IDEs, such as Visual Studio Code, run Python scripts 
 5) A Bash script called "script.sh" performs the four operations above and also launches a RPI client instance, just for test purposes. The real simulation will launch a RPI client instance on each raspberry and the computer will launch the malware attack.<br /><br />
 
 TUTTO IL MATERIALE UTILE E' IN TESTFOLDER, PER ORA, PER EVITARE DI CREARE FILE RANDOM DAPPERTUTTO !
+<span style="color:blue">some *blue* text</span>.

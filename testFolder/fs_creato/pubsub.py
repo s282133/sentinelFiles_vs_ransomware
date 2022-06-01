@@ -20,8 +20,8 @@ class pubsub():
         self.unsubTopics = []
         self.unsubTopics.append(self.pubTopic) 
         self.client.mySubscribe(self.subTopic)
-        self.blacklist = open("blacklist.json", "w")
-        self.blacklist.close()
+        # self.blacklist = open("blacklist.json", "w")
+        # self.blacklist.close()
         self.banTime = 10 * 60
         
 
@@ -33,21 +33,25 @@ class pubsub():
         self.client.myPublish(topic, message)
 
     def notify(self, topic, message):
-        if(topic in self.unsubTopics):
+        if(topic in self.unsubTopics or topic == f"PoliTo/C4ES/{self.clientID}/attack"):
             pass        # i.e., ignore the message
         elif(bool(pattern.match(str(topic))) and not topic in self.unsubTopics):
             fields = topic.split("/")
             fieldClientID = fields[2]
-            newUnsubTopic = self.baseTopic + "/" + fieldClientID + "#"
+            newUnsubTopic = self.baseTopic + "/" + fieldClientID + "/#"
             #self.unsubTopics.append(newUnsubTopic)
             # START da testare !
-            self.currBlackListFile = open("blacklist.json", "r")
-            self.currBlackList = json.load(self.currBlackListFile)
-            self.currBlackListFile.close()
-            self.currBlackList.append({"clientID" : fieldClientID, "banTime" : time.time()})
-            self.newBlackListFile = open("blacklist.json", "w")
-            json.dump(self.currBlackList, self.newBlackListFile)
-            print(f"from now on {self.clientID} will not manage messages from {fieldClientID} for {self.banTime} seconds") 
+            # self.currBlackListFile = open("blacklist.json", "r")
+            # self.currBlackList = json.load(self.currBlackListFile)
+            # self.currBlackListFile.close()
+            # self.currBlackList.append({"clientID" : fieldClientID, "banTime" : time.time()})
+            # self.newBlackListFile = open("blacklist.json", "w")
+            # json.dump(self.currBlackList, self.newBlackListFile)
+            print("[DEBUG]  " + str(newUnsubTopic))
+            d = json.loads(message)
+            altered_file = d["hash_mismatch_in"]
+            untrusted_topic = d["untrust_topic"]
+            print(f"In {fieldClientID} there is a wrong hash at {altered_file}, I'm gonna unsubscribe from {untrusted_topic} - unsubrscribe finto !")
             # END da testare !
         else:
             print(f"{self.clientID} received {message} from {topic}")

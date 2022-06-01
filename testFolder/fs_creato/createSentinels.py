@@ -4,6 +4,7 @@ import random
 import string
 import hashlib
 import subprocess
+from stat import S_IREAD, S_IRGRP, S_IROTH
 
 #hasher = hashlib.sha512()
 
@@ -107,4 +108,6 @@ if __name__ == "__main__":
                 hashfile.write(f'{sentinelfilename}\n')
                 hashfile.write(f'{output}\n')
         hashfile.close()
+        # changing permissions: now owner has READ permission, group has READ permission, others have READ permission
+        os.chmod(hashfile,  S_IREAD | S_IRGRP | S_IROTH)
         print(f"DIR: {dirname} FILEs DOPO: {onlyfiles}")

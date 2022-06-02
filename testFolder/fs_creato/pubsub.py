@@ -34,9 +34,12 @@ class pubsub():
         self.client.myPublish(topic, message)
 
     def notify(self, topic, message):
+        print("sono nella notify")
         if(topic in self.unsubTopics or topic == f"PoliTo/C4ES/{self.clientID}/attack"):
+            print("sono nella notify - ignored message")
             pass        # i.e., ignore the message
         elif(bool(pattern.match(str(topic))) and not topic in self.unsubTopics):
+            print("sono nella notify - attack message")
             fields = topic.split("/")
             fieldClientID = fields[2]
             newUnsubTopic = self.baseTopic + fieldClientID + "/#"

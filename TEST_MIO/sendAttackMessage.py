@@ -4,9 +4,9 @@ from MyMQTT import *
 TESTclientID = "TEST"
 
 class testpub():
-    def __init__(self):
-        self.client = MyMQTT(TESTclientID, "test.mosquitto.org", 1883, self)
-        self.clientID = TESTclientID
+    def __init__(self, clientID):
+        self.client = MyMQTT(clientID, "test.mosquitto.org", 1883, self)
+        self.clientID = clientID
         print(f"{self.clientID} created")
         self.start()
 
@@ -20,7 +20,8 @@ class testpub():
 
 if __name__ == "__main__":
 
-    test = testpub()
-    sleep(10)
+    test = testpub("TEST")
+    sleep(2)
+    topic = "PoliTo/C4ES/TEST/attack"
     message = {"hash_mismatch_in" : "test.txt", "untrust_topic" : "PoliTo/C4ES/TEST/attack"}
-    test.myPublish("PoliTo/C4ES/TEST/attack", message)
+    test.myPublish(topic, message)

@@ -65,11 +65,13 @@ if __name__ == "__main__":
         currTime = round(time.time())
         currBlacklistFILE = open("blacklist.json", "r")
         currBlacklist = json.load(currBlacklistFILE)
+        currBanList = currBlacklist["ban_list"]
         currBlacklistFILE.close()
-        for client in currBlacklist:
+        for client in currBanList:
             if currTime - client["banned_until"] > 0:
-                currBlacklist.remove(client)
+                currBanList.remove(client)
                 print(f"{client['clientID']} unbanned")
+        currBlacklist["ban_list"] = currBanList
         newBlacklistFILE = open("blacklist.json", "w")
         json.dump(currBlacklist, newBlacklistFILE)
         newBlacklistFILE.close()

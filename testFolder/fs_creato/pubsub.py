@@ -46,18 +46,21 @@ class pubsub():
             untrusted_topic = d["untrust_topic"]
             self.currBlackListFile = open("blacklist.json", "r")
             self.currBlackList = json.load(self.currBlackListFile)      # dictionary
-            self.ban_list = self.currBlackList["ban_list"]
-            self.currBlackListFile.close()
-            #self.ban_list.insert({"clientID" : fieldClientID, "banTime" : time.time(), "altered_file" : altered_file, "untrusted_topic" : untrusted_topic})
+            self.ban_list = self.currBlackList["ban_list"]              # list
+            print(f"old ban_list: {self.ban_list}")
+            # self.currBlackListFile.close()
             self.ban_list.append({"clientID" : fieldClientID, "banTime" : time.time(), "altered_file" : altered_file, "untrusted_topic" : untrusted_topic})
-            print(f"self.ban_list : {self.ban_list}")
+            print(f"new ban_list : {self.ban_list}")
             self.currBlackList["ban_list"] = self.ban_list
             self.newBlackListFile = open("blacklist.json", "w")
             print(f"self.updatedBlackList : {self.currBlackList}")
             json.dump(self.currBlackList, self.newBlackListFile, indent=4)
+            self.newBlackListFile.close()
+            self.currBlackListFile.close()
             print(f"In {fieldClientID} there is a wrong hash at {altered_file}, I'm gonna unsubscribe from {untrusted_topic} - unsubrscribe finto !")
             # END da testare !
         else:
             print(f"{self.clientID} received {message} from {topic}")
+        
 
 # cose da aggiungere: logica per cui se currTime - entryTime > threshold => riabilita il client

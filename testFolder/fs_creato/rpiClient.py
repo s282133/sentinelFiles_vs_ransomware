@@ -33,7 +33,7 @@ if __name__ == "__main__":
             
     while True:
             
-        start = time.time()
+        #start = time.time()
 
         # allfilesListInDir = []
         # filesListInDir = []
@@ -61,5 +61,15 @@ if __name__ == "__main__":
                         # qui potrei mettere lo shutdown del sistema, per ora si ferma solamente
                         pass
 
-        end = time.time()
-        print(f"Time elapsed: {end-start}")
+        # non ottimizzato, fa questo controllo molto spesso
+        currTime = round(time.time())
+        currBlacklistFILE = open("blacklist.json", "r")
+        currBlacklist = json.load(currBlacklistFILE)
+        currBlacklistFILE.close()
+        for client in currBlacklist:
+            if currTime - client["banned_until"] > 0:
+                currBlacklist.remove(client)
+                print(f"{client['clientID']} unbanned")
+        newBlacklistFILE = open("blacklist.json", "w")
+        json.dump(currBlacklist, newBlacklistFILE)
+        newBlacklistFILE.close()

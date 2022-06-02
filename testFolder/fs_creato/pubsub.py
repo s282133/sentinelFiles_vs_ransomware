@@ -23,7 +23,7 @@ class pubsub():
         self.blacklist = open("blacklist.json", "w")
         self.blacklist.write('{"ban_list":[]}')
         self.blacklist.close()
-        self.banTime = 10 * 60
+        self.banTime = 1 * 60
         
 
     def start (self):
@@ -52,7 +52,9 @@ class pubsub():
             self.ban_list = self.currBlackList["ban_list"]              # list
             print(f"old ban_list: {self.ban_list}")
             # self.currBlackListFile.close()
-            self.ban_list.append({"clientID" : fieldClientID, "banTime" : time.time(), "altered_file" : altered_file, "untrusted_topic" : untrusted_topic})
+            ban_time = round(time.time())
+            banned_until = ban_time + self.banTime
+            self.ban_list.append({"clientID" : fieldClientID, "banned_at" : ban_time, "banned_until" : banned_until, "altered_file" : altered_file, "untrusted_topic" : untrusted_topic})
             print(f"new ban_list : {self.ban_list}")
             self.currBlackList["ban_list"] = self.ban_list
             self.newBlackListFile = open("blacklist.json", "w")

@@ -17,6 +17,17 @@ def computeHash(filename):
     #print(output)
     return output
 
+def shutdownRPI():
+    print("Start shutdown procedure RPI...")
+    emptyBlacklistFile = open("blacklist.json", "w")
+    emptyBlacklistFile.write('{"ban_list":[]}')
+    bashcommand = "shutdown -h now"
+    while True:
+        # voglio prima controllare che il json si resetti
+        pass
+    process = subprocess.Popen(bashcommand.split(), stdout=subprocess.PIPE)
+    output,error = process.communicate()
+
 if __name__ == "__main__":
 
     clientname = str(sys.argv[1])
@@ -48,6 +59,12 @@ if __name__ == "__main__":
                 hash_i_digestSTORED = str(storedHashFile.readline().rstrip('\n'))
                 #print(f"hash_i_digestSTORED\n{repr(hash_i_digestSTORED)}")
                 filename = hash_i_name
+                if not os.path.exists(filename):
+                    print(f"Sentinel File {filename} has been deleted!")
+                    message = {"hash_mismatch_in" : filename, "untrust_topic" : rpi.pubTopic + "/#"}
+                    rpi.myPublish("PoliTo/C4ES/" + clientname + "/attack", message)
+                    shutdownRPI()
+
                 #print(f"filename : {filename}")
                 hash_i_digestCOMPUTED = computeHash(filename)
                 #print(f"hash_i_digestCOMPUTED\n{repr(hash_i_digestCOMPUTED)}")
@@ -57,9 +74,7 @@ if __name__ == "__main__":
                     # @TODO: capire come prendere il clientID del malware
                     message = {"hash_mismatch_in" : filename, "untrust_topic" : rpi.pubTopic + "/#"}
                     rpi.myPublish("PoliTo/C4ES/" + clientname + "/attack", message)
-                    while True:
-                        # qui potrei mettere lo shutdown del sistema, per ora si ferma solamente
-                        pass
+                    shutdownRPI()
 
         # non ottimizzato, fa questo controllo molto spesso
         currTime = round(time.time())

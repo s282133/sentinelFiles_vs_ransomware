@@ -4,6 +4,8 @@ import paho.mqtt.client as PahoMQTT
 import json
 import time
 import re
+import subprocess
+import sys, os
 
 pattern = re.compile(r'PoliTo/C4ES/.+/attack')
 
@@ -72,8 +74,21 @@ class pubsub():
             self.currBlackListFile.close()
             print(f"In {fieldClientID} there is a wrong hash at {altered_file}, I'm gonna unsubscribe from {untrusted_topic} - unsubrscribe finto !")
             # END da testare !
-        else:
-            print(f"{self.clientID} received {message} from {topic}")
-        
+        else:       # è un comando o un messaggio normale da non trattare
+            print(f"{self.clientID} received {message} from {topic}, it is a command")
+            # write in log file the new command
+            d = json.loads(message)
+            dest = d["dest"]
+            src = d["src"]
+            command = d["command"]
+            if(dest == self.clientID):
+                print(f"{self.clientID} received {message} from {topic}, it is a command")
+                self.logFile = open("log.txt", "a")
+                self.logFile.write(f"{src} : {command}\n")
+                self.logFile.close()
+                # execute the command
+                process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
+                output,error = process.communicate()
+
 
 # cose da aggiungere: logica per cui se currTime - entryTime > threshold => riabilita il client

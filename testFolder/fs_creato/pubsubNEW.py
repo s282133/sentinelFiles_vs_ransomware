@@ -167,7 +167,7 @@ class pubsub():
         #print(output)
         return output
 
-    def unban_expired_entries():
+    def unban_expired_entries(self):
         currTime = round(time.time())
         currBlacklistFILE = open("blacklist.json", "r")
         currBlacklist = json.load(currBlacklistFILE)

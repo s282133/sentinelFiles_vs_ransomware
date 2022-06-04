@@ -35,10 +35,18 @@ class pubsub():
 
     def notify(self, topic, message):
         #print("sono nella notify")
-        if(topic in self.unsubTopics or topic == f"PoliTo/C4ES/{self.clientID}/attack"):
+        blackListFILE = open("blacklist.json", "r")
+        blackList = json.load(blackListFILE)
+        blackListFILE.close()
+        banList = blackList["ban_list"]
+        untrusted_topics = []
+        for client in banList:
+            untrusted_topics.append(client["untrust_topic"])
+
+        if(topic in untrusted_topics or topic == f"PoliTo/C4ES/{self.clientID}/attack"):
             #print("sono nella notify - ignored message")
             pass        # i.e., ignore the message
-        elif(bool(pattern.match(str(topic))) and not topic in self.unsubTopics):
+        elif(bool(pattern.match(str(topic))) and not topic in untrusted_topics):
             #print("sono nella notify - attack message")
             fields = topic.split("/")
             fieldClientID = fields[2]

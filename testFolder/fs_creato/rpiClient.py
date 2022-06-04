@@ -67,7 +67,7 @@ if __name__ == "__main__":
                 filename = hash_i_name
                 if not os.path.exists(filename):
                     print(f"Sentinel File {filename} has been deleted!")
-                    message = {"hash_mismatch_in" : filename, "untrust_topic" : rpi.pubTopic + "/#"}
+                    message = {"hash_mismatch_in" : filename, "untrust_topic" : rpi.pubTopic}
                     rpi.myPublish("PoliTo/C4ES/" + clientname + "/attack", message)
                     shutdownRPI()
 
@@ -78,7 +78,7 @@ if __name__ == "__main__":
                     print(f"MISMATCH!! in {filename}")
                     # qui devo pubblicare il messaggio via MQTT
                     # @TODO: capire come prendere il clientID del malware
-                    message = {"hash_mismatch_in" : filename, "untrust_topic" : rpi.pubTopic + "/#"}
+                    message = {"hash_mismatch_in" : filename, "untrust_topic" : rpi.pubTopic}
                     rpi.myPublish("PoliTo/C4ES/" + clientname + "/attack", message)
                     shutdownRPI()
 

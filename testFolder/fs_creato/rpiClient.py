@@ -19,8 +19,14 @@ def computeHash(filename):
 
 def shutdownRPI():
     print("Start shutdown procedure RPI...")
+    currentBlacklistFile = open("blacklist.json", "r")
+    currentBlacklist = json.load(currentBlacklistFile)
+    currentBlacklistFile.close()
+    currentBannedList = currentBlacklist["ban_list"]
+    currentBannedList = []
+    currentBlacklist["ban_list"] = currentBannedList
     emptyBlacklistFile = open("blacklist.json", "w")
-    emptyBlacklistFile.write('{"ban_list":[]}')
+    json.dump(currentBlacklist, emptyBlacklistFile)
     bashcommand = "shutdown -h now"
     while True:
         # voglio prima controllare che il json si resetti

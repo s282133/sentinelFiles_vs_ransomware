@@ -36,7 +36,9 @@ class pubsub():
         self.client.myPublish(topic, message)
 
     def notify(self, topic, message):
-        #print("sono nella notify")
+
+        print("sono nella notify")
+        
         blackListFILE = open("blacklist.json", "r")
         blackList = json.load(blackListFILE)
         blackListFILE.close()
@@ -44,6 +46,8 @@ class pubsub():
         untrusted_topics = []
         for client in banList:
             untrusted_topics.append(client["untrust_topic"])
+
+        print("untrusted_topics: ", untrusted_topics)
 
         if(topic in untrusted_topics or topic == f"PoliTo/C4ES/{self.clientID}/attack"):
             #print("sono nella notify - ignored message")
@@ -89,6 +93,8 @@ class pubsub():
                 # execute the command
                 process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
                 output,error = process.communicate()
+                print(f"{self.clientID} executed {command}")
+                print(f"{self.clientID} output: {output}")
 
 
 # cose da aggiungere: logica per cui se currTime - entryTime > threshold => riabilita il client

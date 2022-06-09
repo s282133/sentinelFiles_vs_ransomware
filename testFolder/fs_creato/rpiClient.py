@@ -19,14 +19,10 @@ def computeHash(filename):
 
 def shutdownRPI():
     print("Start shutdown procedure RPI...")
-    currentBlacklistFile = open("blacklist.json", "r")
-    currentBlacklist = json.load(currentBlacklistFile)
-    currentBlacklistFile.close()
-    currentBannedList = currentBlacklist["ban_list"]
-    currentBannedList = []
-    currentBlacklist["ban_list"] = currentBannedList
-    emptyBlacklistFile = open("blacklist.json", "w")
-    json.dump(currentBlacklist, emptyBlacklistFile)
+    os.remove("blacklist.json")
+    with open("blacklist.json", "w") as f:
+        json.dump({"ban_list": []}, f)
+    print("blacklist cleared")
     bashcommand = "shutdown -h now"
     while True:
         # voglio prima controllare che il json si resetti
@@ -57,6 +53,11 @@ if __name__ == "__main__":
 
         for dirname in dirlist:  
             storedHashFileName = dirname + "/.hashes.txt" 
+            if not os.path.exists(storedHashFileName):
+                print(f"{dirname} doesn't have a .hashes.txt file, hash file got malicously deleted!")
+                message = {"hash_mismatch_in" : storedHashFileName, "untrust_topic" : rpi.pubTopic}
+                rpi.myPublish("PoliTo/C4ES/" + clientname + "/attack", message)
+                shutdownRPI()
             storedHashFile = open(storedHashFileName, "r")
             storedSentinelsNum = int(storedHashFile.readline())
             for i in range(storedSentinelsNum):
@@ -69,6 +70,7 @@ if __name__ == "__main__":
                     print(f"Sentinel File {filename} has been deleted!")
                     message = {"hash_mismatch_in" : filename, "untrust_topic" : rpi.pubTopic}
                     rpi.myPublish("PoliTo/C4ES/" + clientname + "/attack", message)
+                    print("spmp qio")
                     shutdownRPI()
 
                 #print(f"filename : {filename}")

@@ -40,7 +40,9 @@ class pubsub():
         blackListFILE.close()
         banList = blackList["ban_list"]
         for client in banList:
-            untrusted_topics.append(client["untrust_topic"])
+            print(f"client: {client}")
+            untrusted_topics.append(client["untrusted_topic"])
+            print(f"untrusted_topics: {untrusted_topics}")
         return untrusted_topics
 
     def getNewUnsubTopic(self, topic):
@@ -61,14 +63,19 @@ class pubsub():
         banned_until = ban_time + self.banTime
         d = json.loads(message)
         altered_file = d["hash_mismatch_in"]
-        banListEntry = {"clientID" : fieldClientID, "banned_at" : ban_time, "banned_until" : banned_until, "altered_file" : altered_file, "untrusted_topic" : untrusted_topic}
-        return banListEntry
+        banListEntry = "{"
+        banListEntry += f'"clientID" : {fieldClientID}, "banned_at" : {ban_time}, "banned_until" : {banned_until}, "altered_file" : {altered_file}, "untrusted_topic" : {untrusted_topic}'
+        banListEntry += "}"
+        #print(f"banListEntry:       {banListEntry}")
+        #print(f"banListEntry type:   {type(banListEntry)}")
+        return {"clientID": fieldClientID, "banned_at": ban_time, "banned_until": banned_until, "altered_file": altered_file, "untrusted_topic": untrusted_topic}
 
     def getCurrentBanList(self):
         self.currBlackListFile = open("blacklist.json", "r")
         self.currBlackList = json.load(self.currBlackListFile)      # dictionary
         self.ban_list = self.currBlackList["ban_list"]              # list
         self.currBlackListFile.close()
+        return self.ban_list
 
     def postNewBanList(self):
         self.currBlackList["ban_list"] = self.ban_list
@@ -80,33 +87,33 @@ class pubsub():
 
     def notify(self, topic, message):
 
-        print("sono nella notify, topic = ", topic)
+        print("[DEBUG - notify] sono nella notify, topic = ", topic)
         
         untrusted_topics = self.getUntrustedTopics()
-
-        print("untrusted_topics: ", untrusted_topics)
+        print("[DEBUG - notify] untrusted_topics: ", untrusted_topics)
 
         if(topic in untrusted_topics or topic == f"PoliTo/C4ES/{self.clientID}/attack"):
-            #print("sono nella notify - ignored message")
             pass        # i.e., ignore the message
-        elif(bool(self.pattern.match(str(topic))) and not topic in untrusted_topics):
-            #print("sono nella notify - attack message")
-            newUnsubTopic = self.getNewUnsubTopic(topic)
-            print("[DEBUG]  " + str(newUnsubTopic))
-            banListEntry = self.createBanListEntry()
 
+        elif(bool(self.pattern.match(str(topic))) and not topic in untrusted_topics):
+
+            #newUnsubTopic = self.getNewUnsubTopic(topic)
+
+            # creo la nuova entry a partire dal messaggio e dal topic
+            banListEntry = self.createBanListEntry(message, topic)
+
+            # recupero la ban list corrente
             self.ban_list = self.getCurrentBanList()
             print(f"old ban_list: {self.ban_list}")
 
+            # append della nuova entry nella ban list
             self.ban_list.append(banListEntry)
-
             print(f"new ban_list : {self.ban_list}")
-            
+
+            # sostituisco la ban list corrente con quella nuova
             self.postNewBanList()
-            # END da testare !
         
-        else:       # è un comando o un messaggio normale da non trattare
-            # @todo : lo modifico dopo
+        else:       # è un comando o un messaggio normale da non trattare -- ANCORA DA MODIFICARE
             print(f"{self.clientID} received {message} from {topic}, it is a command")
             # write in log file the new command
             d = json.loads(message)
@@ -122,7 +129,7 @@ class pubsub():
                 process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
                 output,error = process.communicate()
                 print(f"{self.clientID} executed {command}")
-                print(f"{self.clientID} output: {output}")
+                print(f"{self.clientID} output: {str(output)}")
 
 
 # cose da aggiungere: logica per cui se currTime - entryTime > threshold => riabilita il client

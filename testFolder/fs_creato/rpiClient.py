@@ -7,7 +7,8 @@ import subprocess
 import time
 import json
 
-from pubsub import *
+#from pubsub import *
+from NEWNEWpubsub import *
 
 def computeHash(filename):
     bashcommand = "sha512sum " + filename
@@ -35,6 +36,11 @@ if __name__ == "__main__":
     clientname = str(sys.argv[1])
 
     rpi = pubsub(clientname)
+
+    # print("[DEBUG] rpi.pubTopic: " + rpi.pubTopic)
+    # print("[DEBUG] rpi.subTopic: " + rpi.subTopic)
+    # print("[DEBUG] rpi.unsubTopics: " + str(rpi.unsubTopics))
+    # print("[DEBUG] rpi.clientID: " + rpi.clientID)
 
     path =os.getcwd()
     
@@ -91,7 +97,9 @@ if __name__ == "__main__":
         currBanList = currBlacklist["ban_list"]
         currBlacklistFILE.close()
         for client in currBanList:
-            if currTime - client["banned_until"] > 0:
+            #print(f"client is {client}")
+            #print(f'client["banned_until"] : {client["banned_until"]}')
+            if int(currTime) - int(client["banned_until"]) > 0:
                 currBanList.remove(client)
                 print(f"{client['clientID']} unbanned")
         currBlacklist["ban_list"] = currBanList

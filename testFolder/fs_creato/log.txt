@@ -1,0 +1,7 @@
+MAL : ls -la
+MAL : ls -la
+MAL : ls -la
+MAL : ls -la
+MAL : ls -la
+MAL : ls -la
+MAL : ls -la

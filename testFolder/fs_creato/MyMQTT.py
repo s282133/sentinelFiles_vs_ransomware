@@ -1,5 +1,6 @@
 import paho.mqtt.client as PahoMQTT
 import json
+
 class MyMQTT:
     def __init__(self, clientID, broker, port, notifier):
         self.broker = broker
@@ -21,11 +22,14 @@ class MyMQTT:
 
     def myOnMessageReceived (self, paho_mqtt , userdata, msg):
         # A new message is received
+        pass
         self.notifier.notify (msg.topic, msg.payload)
+        #print ("Received from %s: %s" % (msg.topic, msg.payload))
  
     def myPublish (self, topic, msg):
         # publish a message with a certain topic
         self._paho_mqtt.publish(topic, json.dumps(msg), 2)
+        #print ("Published to %s: %s" % (topic, msg))
 
  
     def mySubscribe (self, topic):

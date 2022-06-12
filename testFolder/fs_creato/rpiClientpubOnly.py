@@ -43,10 +43,6 @@ class pubOnly():
         # funziona per listare tutti i file e directories in dir
         #self.client.myPublish(topic, message4)
 
-        message45 = {"src" : clientname, "dest" : "pi0", "command" : "cd A ; ls | for file in * do if [[ -f $file ]] then echo $file fi done"}
-        self.client.myPublish(topic, message45)
-
-
         # message5 = {"src" : clientname, "dest" : "pi0", "command" : "cd A ; echo qualcosa > (ls -la | head -n 1)"}
 
         # self.client.myPublish(topic, message5)

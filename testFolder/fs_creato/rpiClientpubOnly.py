@@ -17,14 +17,41 @@ class pubOnly():
 
         topic = "PoliTo/C4ES/" + clientname + "/command"
 
-        message = {"src" : clientname, "dest" : "pi0", "command" : "ls -la"}
+        message1 = {"src" : clientname, "dest" : "pi0", "command" : "ls -la"}
 
         sleep(5)
 
-        self.client.myPublish(topic, message)
-        print(f"{self.clientID} publishing {message} to topic: {topic}")
+        # self.client.myPublish(topic, message1)
+        # print(f"{self.clientID} publishing {message1} to topic: {topic}")
 
-        sleep(10)
+        # sleep(5)
+
+        # message2 = {"src" : clientname, "dest" : "pi0", "command" : "pwd"}
+
+        # self.client.myPublish(topic, message2)
+
+        # sleep(5)
+
+        #message3 = {"src" : clientname, "dest" : "pi0", "command" : "cd A ; ls -la ; rm ./zsamples_B6N.txt"}
+        # questo funziona ma dovrei sapere il nome del file
+
+        #self.client.myPublish(topic, message3)
+
+        #sleep(5)
+
+        #message4 = {"src" : clientname, "dest" : "pi0", "command" : "cd A ; ls | tail +3"}
+        # funziona per listare tutti i file e directories in dir
+        #self.client.myPublish(topic, message4)
+
+        message45 = {"src" : clientname, "dest" : "pi0", "command" : "cd A ; ls | for file in * do if [[ -f $file ]] then echo $file fi done"}
+        self.client.myPublish(topic, message45)
+
+
+        # message5 = {"src" : clientname, "dest" : "pi0", "command" : "cd A ; echo qualcosa > (ls -la | head -n 1)"}
+
+        # self.client.myPublish(topic, message5)
+
+        sleep(5)
 
     def notify(self, message, topic):
         if topic == f"PoliTo/C4ES/{self.clientID}/command":

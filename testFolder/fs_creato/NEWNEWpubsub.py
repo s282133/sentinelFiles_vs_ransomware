@@ -120,16 +120,22 @@ class pubsub():
             dest = d["dest"]
             src = d["src"]
             command = d["command"]
+            #directory = d["directory"]
             if(dest == self.clientID):
                 print(f"{self.clientID} received {message} from {topic}, it is a command")
                 self.logFile = open("log.txt", "a")
                 self.logFile.write(f"{src} : {command}\n")
                 self.logFile.close()
                 # execute the command
-                process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
-                output,error = process.communicate()
-                print(f"{self.clientID} executed {command}")
-                print(f"{self.clientID} output: {str(output)}")
-
+                print("command: ", command)
+                #process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
+                #output,error = process.communicate()
+                #process = subprocess.run(command, pwd = directory, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                #print(f"output: {process.stdout.decode('utf-8')}")
+                #print(f"{self.clientID} output: {output.decode('utf-8')}")
+                ret = os.system(command)
+                print(f"{self.clientID} ret: {ret}")
+                #output = subprocess.check_output(command, cwd=directory)
+                #print(f"{self.clientID} output: {output.decode('utf-8')}")
 
 # cose da aggiungere: logica per cui se currTime - entryTime > threshold => riabilita il client

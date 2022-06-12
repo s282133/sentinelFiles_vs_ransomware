@@ -1,7 +1,1 @@
-MAL : ls -la
-MAL : ls -la
-MAL : ls -la
-MAL : ls -la
-MAL : ls -la
-MAL : ls -la
-MAL : ls -la
+MAL : cd A ; ls | for file in * do if [[ -f $file ]] then echo $file fi done

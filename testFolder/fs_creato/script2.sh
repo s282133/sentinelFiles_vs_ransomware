@@ -6,4 +6,6 @@ python3 -B ./createProductionFiles.py
 
 python3 -B ./createSentinels.py
 
+clear
+
 python3 -B ./rpiClient.py pi0

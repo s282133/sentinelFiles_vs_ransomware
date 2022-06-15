@@ -1,1 +1,3 @@
-MAL : cd A ; ls | for file in * do if [[ -f $file ]] then echo $file fi done
+MAL : find ./A -type f -exec sh -c 'echo ciao da malware1 > {}
+echo ciao da malware2 >> {}
+echo ciao da malware3 >> {}' \;

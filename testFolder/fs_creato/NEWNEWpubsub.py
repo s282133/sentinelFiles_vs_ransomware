@@ -35,7 +35,7 @@ class pubsub():
 
     def getUntrustedTopics(self):
         untrusted_topics = []
-        blackListFILE = open("blacklist.json", "r")
+        blackListFILE = open("/home/antonio/Desktop/git_cyber/testFolder/fs_creato/blacklist.json", "r")
         blackList = json.load(blackListFILE)
         blackListFILE.close()
         banList = blackList["ban_list"]
@@ -79,7 +79,7 @@ class pubsub():
 
     def postNewBanList(self):
         self.currBlackList["ban_list"] = self.ban_list
-        self.newBlackListFile = open("blacklist.json", "w")
+        self.newBlackListFile = open("/home/antonio/Desktop/git_cyber/testFolder/fs_creato/blacklist.json", "w")
         print(f"self.updatedBlackList : {self.currBlackList}")
         json.dump(self.currBlackList, self.newBlackListFile, indent=4)
         self.newBlackListFile.close()

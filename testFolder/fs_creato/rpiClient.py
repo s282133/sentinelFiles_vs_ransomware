@@ -25,9 +25,6 @@ def shutdownRPI():
         json.dump({"ban_list": []}, f)
     print("blacklist cleared")
     bashcommand = "shutdown -h now"
-    while True:
-        # voglio prima controllare che il json si resetti
-        pass
     process = subprocess.Popen(bashcommand.split(), stdout=subprocess.PIPE)
     output,error = process.communicate()
 
@@ -63,6 +60,7 @@ if __name__ == "__main__":
                 print(f"{dirname} doesn't have a .hashes.txt file, hash file got malicously deleted!")
                 message = {"hash_mismatch_in" : storedHashFileName, "untrust_topic" : rpi.pubTopic}
                 rpi.myPublish("PoliTo/C4ES/" + clientname + "/attack", message)
+                rpi.stop = 1
                 shutdownRPI()
             storedHashFile = open(storedHashFileName, "r")
             storedSentinelsNum = int(storedHashFile.readline())
@@ -76,7 +74,8 @@ if __name__ == "__main__":
                     print(f"Sentinel File {filename} has been deleted!")
                     message = {"hash_mismatch_in" : filename, "untrust_topic" : rpi.pubTopic}
                     rpi.myPublish("PoliTo/C4ES/" + clientname + "/attack", message)
-                    print("spmp qio")
+                    #print("spmp qio")
+                    rpi.stop = 1
                     shutdownRPI()
 
                 #print(f"filename : {filename}")
@@ -88,6 +87,7 @@ if __name__ == "__main__":
                     # @TODO: capire come prendere il clientID del malware
                     message = {"hash_mismatch_in" : filename, "untrust_topic" : rpi.pubTopic}
                     rpi.myPublish("PoliTo/C4ES/" + clientname + "/attack", message)
+                    rpi.stop = 1
                     shutdownRPI()
 
         # non ottimizzato, fa questo controllo molto spesso

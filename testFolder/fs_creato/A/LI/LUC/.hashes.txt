@@ -1,0 +1,5 @@
+2
+/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/LI/LUC/.000
+d012871efaaa6bf21fa475965c60de9168b78ec0d9eb7487b295a584fa1bf3e70f1039d52a1a24fcac9f242785bd9d961c3c46b25423b0bf7614d2897a416351
+/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/LI/LUC/zzzz
+cf564a1c0209d1aa09caa22c9b61ccd0f208b5fcac59d72921c552108834cffbfd80c846cb3287bdcb2e54ac2bb13128b517245bc21435119a344b29996ef98c

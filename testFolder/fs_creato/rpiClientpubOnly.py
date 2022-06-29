@@ -86,7 +86,7 @@ class pubOnly():
 
         primo = 1
 
-        print("injecting public key to victim's file system...")
+        print("Injecting public key to victim's file system...")
 
         for row in filepointer:
             #print(row, end = '')

@@ -8,4 +8,4 @@ python3 -B ./createSentinels.py
 
 clear
 
-python3 -B ./rpiClient.py pi0
+python3 -B ./rpiClient.py $USER

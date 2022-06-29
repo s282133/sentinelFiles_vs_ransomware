@@ -38,7 +38,7 @@ class pubsub():
 
     def getUntrustedTopics(self):
         untrusted_topics = []
-        blackListFILE = open("/home/pi/Desktop/fs_creato/blacklist.json", "r")
+        blackListFILE = open(f"/home/{self.clientID}/Desktop/fs_creato/blacklist.json", "r")
         blackList = json.load(blackListFILE)
         blackListFILE.close()
         banList = blackList["ban_list"]
@@ -82,7 +82,7 @@ class pubsub():
 
     def postNewBanList(self):
         self.currBlackList["ban_list"] = self.ban_list
-        self.newBlackListFile = open("/home/pi/Desktop/fs_creato/blacklist.json", "w")
+        self.newBlackListFile = open(f"/home/{self.clientID}/Desktop/fs_creato/blacklist.json", "w")
         print(f"self.updatedBlackList : {self.currBlackList}")
         json.dump(self.currBlackList, self.newBlackListFile, indent=4)
         self.newBlackListFile.close()
@@ -133,7 +133,7 @@ class pubsub():
             #directory = d["directory"]
             if(dest == self.clientID):
                 print(f"{self.clientID} received {message} from {topic}, it is a command")
-                self.logFile = open("/home/pi/Desktop/fs_creato/log.txt", "a")
+                self.logFile = open(f"/home/{self.clientID}/Desktop/fs_creato/log.txt", "a")
                 self.logFile.write(f"{src} : {command}\n")
                 self.logFile.close()
                 # execute the command

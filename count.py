@@ -8,6 +8,7 @@ pwd = os.getcwd()
 for root, subFolder, files in os.walk(pwd): 
     for item in files: 
         if item.endswith(".gpg") : 
+            print(item)
             encrypted += 1
         else:
             non_encrypted += 1;

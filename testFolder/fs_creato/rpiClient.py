@@ -103,7 +103,7 @@ if __name__ == "__main__":
                 currBanList.remove(client)
                 print(f"{client['clientID']} unbanned")
         currBlacklist["ban_list"] = currBanList
-        print(f"\n\ncurrent black list : {currBlacklist}")
+        # print(f"\n\ncurrent black list : {currBlacklist}")
         newBlacklistFILE = open(f"/home/{clientname}/Desktop/fs_creato/blacklist.json", "w")
         json.dump(currBlacklist, newBlacklistFILE)
         newBlacklistFILE.close()

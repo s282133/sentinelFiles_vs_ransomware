@@ -83,7 +83,7 @@ class pubsub():
     def postNewBanList(self):
         self.currBlackList["ban_list"] = self.ban_list
         self.newBlackListFile = open(f"/home/{self.clientID}/Desktop/fs_creato/blacklist.json", "w")
-        print(f"self.updatedBlackList : {self.currBlackList}")
+        print(f"New BlackList :\n{self.currBlackList}")
         json.dump(self.currBlackList, self.newBlackListFile, indent=4)
         self.newBlackListFile.close()
 

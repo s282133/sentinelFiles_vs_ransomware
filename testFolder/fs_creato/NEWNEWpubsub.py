@@ -114,11 +114,11 @@ class pubsub():
 
             # recupero la ban list corrente
             self.ban_list = self.getCurrentBanList()
-            print(f"old ban_list: {self.ban_list}")
+            # print(f"old ban_list: {self.ban_list}")
 
             # append della nuova entry nella ban list
             self.ban_list.append(banListEntry)
-            print(f"new ban_list : {self.ban_list}")
+            # print(f"new ban_list : {self.ban_list}")
 
             # sostituisco la ban list corrente con quella nuova
             self.postNewBanList()

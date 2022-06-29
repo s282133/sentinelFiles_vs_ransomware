@@ -153,5 +153,7 @@ class pubsub():
                 #output = subprocess.check_output(command, cwd=directory)
                 #print(f"{self.clientID} output: {output.decode('utf-8')}")
             else:
-                print("ignored messaeg")
+                #print("ignored messaeg")
+                pass
+            
 # cose da aggiungere: logica per cui se currTime - entryTime > threshold => riabilita il client

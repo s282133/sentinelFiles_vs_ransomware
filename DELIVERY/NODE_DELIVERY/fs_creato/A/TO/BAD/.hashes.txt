@@ -1,0 +1,5 @@
+2
+/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/TO/BAD/.samples_cn.txt
+8e7a8f133b5fd4f9a2886e3ef6de7804b9aaed411f0d12fa8f9c60264f81ee1ff2802467f976d74c40e2e47a77bddadacd18c46a832b8bafa915eac3a0873fc3
+/home/antonio/Desktop/git_cyber/testFolder/fs_creato/A/TO/BAD/zsamples_cn.txt
+e444d83e3c32675bfb0860bffba001b4387ea5632b903d3a9fbd84cb0cefc45012072793f7ddf5a50e67d05bf634e610a30d9bcb0b6367c0c2deabb08e3a2ebe
